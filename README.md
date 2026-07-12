@@ -29,7 +29,16 @@ Some prompts to answer:
   target_energy: float
   likes_acoustic: bool
 - How does your `Recommender` compute a score for each song
+  The app compares the genre, mood, energy, and acousticness fields of each song in the CSV file against the corresponding inputs the user entered.\
+  If the genres and moods match, two points and one point, respectively, will be added to the score. \
+  If the song is acoustic and the user likes acoustic (acousticness must be > 0.5) or if the song is not acoustic and the user doesn't like acoustic, 0.5 points will be added. \
+  If either of these values don't match, no points will be added. If the song's energy is very far from the target energy (difference >= 10), 1 point will be deducted from the score. \
+  If the song's energy is a little far from the target energy (5 < difference < 10), no points will be added to the score. \
+  If the song's energy is very close to the target energy (1 < difference <= 5), 1 point will be added to the score.\
+  Potential bias: This system might over-prioritize genre, ignoring great songs that match user's acousticness preferences.
+
 - How do you choose which songs to recommend
+  I will suggest the three songs with the highest scores generated from the described algorithm.
 
 You can include a simple diagram or bullet list if helpful.
 
